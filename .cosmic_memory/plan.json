@@ -1,0 +1,21 @@
+{
+  "goal": "Test Execution",
+  "steps": [
+    {
+      "id": 1,
+      "action": "create",
+      "path": "core/test_mock.py",
+      "description": "Create a test file",
+      "content": "print('Hello form Mock Planner')",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "action": "run_command",
+      "path": "echo 'Mock execution running'",
+      "description": "Run a safe command",
+      "content": null,
+      "status": "pending"
+    }
+  ]
+}

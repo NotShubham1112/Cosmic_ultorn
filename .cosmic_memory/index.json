@@ -1,0 +1,280 @@
+{
+  "project_scaffold.py": {
+    "path": "project_scaffold.py",
+    "language": "python",
+    "functions": [
+      {
+        "name": "create_structure",
+        "lineno": 4
+      }
+    ],
+    "classes": [],
+    "imports": [
+      "os",
+      "pathlib"
+    ]
+  },
+  "core/cli.py": {
+    "path": "core/cli.py",
+    "language": "python",
+    "functions": [
+      {
+        "name": "index",
+        "lineno": 21
+      },
+      {
+        "name": "plan",
+        "lineno": 41
+      },
+      {
+        "name": "execute",
+        "lineno": 55
+      }
+    ],
+    "classes": [],
+    "imports": [
+      "sys",
+      "os",
+      "typer",
+      "rich.console.Console",
+      "rich.table.Table",
+      "pathlib.Path",
+      "core.indexer.Indexer",
+      "core.planner.Planner",
+      "core.memory.persistence.Memory",
+      "core.execution.Executor"
+    ]
+  },
+  "core/execution.py": {
+    "path": "core/execution.py",
+    "language": "python",
+    "functions": [
+      {
+        "name": "__init__",
+        "lineno": 10
+      },
+      {
+        "name": "execute_plan",
+        "lineno": 13
+      },
+      {
+        "name": "_execute_step",
+        "lineno": 40
+      },
+      {
+        "name": "_create_file",
+        "lineno": 56
+      },
+      {
+        "name": "_modify_file",
+        "lineno": 66
+      },
+      {
+        "name": "_delete_file",
+        "lineno": 83
+      },
+      {
+        "name": "_run_command",
+        "lineno": 92
+      }
+    ],
+    "classes": [
+      {
+        "name": "Executor",
+        "lineno": 9
+      }
+    ],
+    "imports": [
+      "os",
+      "subprocess",
+      "typing.List",
+      "rich.console.Console",
+      "core.planner.Plan",
+      "core.planner.Step"
+    ]
+  },
+  "core/indexer.py": {
+    "path": "core/indexer.py",
+    "language": "python",
+    "functions": [
+      {
+        "name": "__init__",
+        "lineno": 14
+      },
+      {
+        "name": "__repr__",
+        "lineno": 22
+      },
+      {
+        "name": "__init__",
+        "lineno": 26
+      },
+      {
+        "name": "walk_and_index",
+        "lineno": 31
+      },
+      {
+        "name": "_index_file",
+        "lineno": 51
+      },
+      {
+        "name": "_parse_python",
+        "lineno": 56
+      },
+      {
+        "name": "_build_dependency_graph",
+        "lineno": 87
+      },
+      {
+        "name": "get_summary",
+        "lineno": 119
+      },
+      {
+        "name": "export_graph",
+        "lineno": 125
+      }
+    ],
+    "classes": [
+      {
+        "name": "FileNode",
+        "lineno": 13
+      },
+      {
+        "name": "Indexer",
+        "lineno": 25
+      }
+    ],
+    "imports": [
+      "os",
+      "ast",
+      "typing.List",
+      "typing.Dict",
+      "typing.Any",
+      "typing.Optional",
+      "pathlib.Path",
+      "logging",
+      "networkx",
+      "json",
+      "sys"
+    ]
+  },
+  "core/planner.py": {
+    "path": "core/planner.py",
+    "language": "python",
+    "functions": [
+      {
+        "name": "__init__",
+        "lineno": 24
+      },
+      {
+        "name": "create_plan",
+        "lineno": 27
+      }
+    ],
+    "classes": [
+      {
+        "name": "Step",
+        "lineno": 11
+      },
+      {
+        "name": "Plan",
+        "lineno": 19
+      },
+      {
+        "name": "Planner",
+        "lineno": 23
+      }
+    ],
+    "imports": [
+      "typing.List",
+      "typing.Dict",
+      "typing.Any",
+      "typing.Optional",
+      "pydantic.BaseModel",
+      "os",
+      "dotenv.load_dotenv",
+      "langchain_core.prompts.ChatPromptTemplate",
+      "langchain_openai.ChatOpenAI",
+      "langchain_core.output_parsers.PydanticOutputParser"
+    ]
+  },
+  "core/__init__.py": {
+    "path": "core/__init__.py",
+    "language": "python",
+    "functions": [],
+    "classes": [],
+    "imports": []
+  },
+  "core/agents/__init__.py": {
+    "path": "core/agents/__init__.py",
+    "language": "python",
+    "functions": [],
+    "classes": [],
+    "imports": []
+  },
+  "core/memory/persistence.py": {
+    "path": "core/memory/persistence.py",
+    "language": "python",
+    "functions": [
+      {
+        "name": "__init__",
+        "lineno": 9
+      },
+      {
+        "name": "save_index",
+        "lineno": 16
+      },
+      {
+        "name": "load_index",
+        "lineno": 39
+      },
+      {
+        "name": "save_plan",
+        "lineno": 65
+      },
+      {
+        "name": "load_plan",
+        "lineno": 71
+      }
+    ],
+    "classes": [
+      {
+        "name": "Memory",
+        "lineno": 8
+      }
+    ],
+    "imports": [
+      "json",
+      "networkx",
+      "pathlib.Path",
+      "typing.Dict",
+      "typing.Optional",
+      "typing.Any",
+      "core.indexer.FileNode",
+      "core.indexer.Indexer",
+      "core.planner.Plan",
+      "core.planner.Step"
+    ]
+  },
+  "core/memory/__init__.py": {
+    "path": "core/memory/__init__.py",
+    "language": "python",
+    "functions": [],
+    "classes": [],
+    "imports": []
+  },
+  "core/tools/__init__.py": {
+    "path": "core/tools/__init__.py",
+    "language": "python",
+    "functions": [],
+    "classes": [],
+    "imports": []
+  },
+  "scripts/__init__.py": {
+    "path": "scripts/__init__.py",
+    "language": "python",
+    "functions": [],
+    "classes": [],
+    "imports": []
+  }
+}

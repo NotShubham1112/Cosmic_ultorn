@@ -1,0 +1,64 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "project_scaffold.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/cli.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/indexer.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/planner.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/__init__.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/agents/__init__.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/memory/__init__.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "core/tools/__init__.py"
+    },
+    {
+      "type": "file",
+      "lang": "python",
+      "id": "scripts/__init__.py"
+    }
+  ],
+  "edges": [
+    {
+      "type": "import",
+      "source": "core/cli.py",
+      "target": "core/indexer.py"
+    },
+    {
+      "type": "import",
+      "source": "core/cli.py",
+      "target": "core/planner.py"
+    }
+  ]
+}
