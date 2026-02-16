@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cosmic_ultorn"
+version = "0.1.0"
+description = "AI Engineering Operating System"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.7.0",
+    "langchain>=0.1.0",
+    "chromadb>=0.4.22",
+    "tree-sitter>=0.20.4",
+]
+
+[project.scripts]
+cosmic = "core.cli:app"
+
+[tool.isort]
+profile = "black"
