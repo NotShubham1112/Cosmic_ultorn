@@ -37,7 +37,7 @@ export default function RootLayout({
         <div className="flex h-screen overflow-hidden border-t">
           <Sidebar className="w-64 hidden md:block" />
           <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-            <ResizablePanelGroup direction="horizontal">
+            <ResizablePanelGroup orientation="horizontal">
               <ResizablePanel defaultSize={75} minSize={30}>
                 <main className="flex-1 overflow-y-auto bg-background">
                   {children}

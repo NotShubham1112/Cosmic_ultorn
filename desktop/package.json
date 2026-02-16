@@ -6,7 +6,9 @@
   "scripts": {
     "build:electron": "tsc",
     "dev:electron": "tsc -w",
-    "start": "electron .",
+    "dev:fast": "concurrently \"npm run dev:next\" \"wait-on http://localhost:3000 && npm run start:ts\"",
+    "start": "\".\\node_modules\\electron\\dist\\electron.exe\" .",
+    "start:ts": "\".\\node_modules\\electron\\dist\\electron.exe\" -r ts-node/register main.ts",
     "dev": "concurrently \"npm run dev:electron\" \"npm run dev:next\" \"wait-on http://localhost:3000 && npm run start\"",
     "dev:next": "cd app && npm run dev"
   },
@@ -24,5 +26,11 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3",
     "wait-on": "^9.0.4"
+  },
+  "dependencies": {
+    "@langchain/openai": "^1.2.7",
+    "dotenv": "^17.3.1",
+    "langchain": "^1.2.24",
+    "zod": "^4.3.6"
   }
 }

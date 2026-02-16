@@ -2,18 +2,31 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
     "outDir": "dist",
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "*"
+      ]
     }
   },
-  "include": ["main.ts", "preload.ts", "src/**/*"],
-  "exclude": ["node_modules", "app"]
+  "include": [
+    "main.ts",
+    "preload.ts",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "app"
+  ]
 }
