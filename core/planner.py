@@ -5,15 +5,20 @@ from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import PydanticOutputParser
+from .tools.mcp.registry import ToolRegistry
+from .tools.builtins.filesystem import create_filesystem_client
+from .tools.integrations.github import GitHubMCPClient
+from .tools.mcp.schemas import ToolCall
 
 load_dotenv()
 
 class Step(BaseModel):
     id: int
-    action: str = "review" # create, modify, delete, run_command, review
+    action: str = "review" # create, modify, delete, run_command, review, tool_call
     path: str = ""
     description: str
     content: Optional[str] = None # New content for create/modify
+    tool_call: Optional[ToolCall] = None # Structured tool call
     status: str = "pending"
 
 class Plan(BaseModel):
@@ -22,7 +27,21 @@ class Plan(BaseModel):
 
 class Planner:
     def __init__(self):
-        pass
+        self.registry = ToolRegistry()
+        self._register_default_tools()
+
+    def _register_default_tools(self):
+        # 1. FileSystem (sandboxed)
+        fs_client = create_filesystem_client()
+        self.registry.register_server("filesystem", fs_client)
+        for tool in fs_client.list_tools():
+            self.registry.register_tool("filesystem", tool)
+
+        # 2. GitHub
+        gh_client = GitHubMCPClient()
+        self.registry.register_server("github", gh_client)
+        for tool in gh_client.list_tools():
+            self.registry.register_tool("github", tool)
 
     def create_plan(self, goal: str) -> Plan:
         """
@@ -35,11 +54,17 @@ class Planner:
                 llm = ChatOpenAI(api_key=api_key, model="gpt-4o", temperature=0)
                 parser = PydanticOutputParser(pydantic_object=Plan)
                 
-                system_prompt = """You are an expert AI software architect.
+                tools_desc = "\n".join([f"- {t.name}: {t.description}" for t in self.registry.list_tools()])
+                
+                system_prompt = f"""You are an expert AI software architect.
                 Create a detailed, step-by-step implementation plan.
+                
+                Available Tools:
+                {tools_desc}
+                
                 For each step, specify:
-                - action: 'create', 'modify', 'delete', 'run_command'
-                - path: target file path or command to run
+                - action: 'tool_call' (PREFERRED) or legacy actions ('create', 'modify', 'run_command')
+                - tool_call: If action is 'tool_call', provide the tool name and arguments.
                 - description: brief explanation of what to do
                 
                 Ensure dependencies are handled first.

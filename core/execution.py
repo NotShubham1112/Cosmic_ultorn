@@ -3,12 +3,14 @@ import subprocess
 from typing import List
 from rich.console import Console
 from core.planner import Plan, Step
+from core.tools.mcp.registry import ToolRegistry
+from core.tools.mcp.schemas import ToolCall
 
 console = Console()
 
 class Executor:
     def __init__(self):
-        pass
+        self.registry = ToolRegistry()
 
     def execute_plan(self, plan: Plan) -> bool:
         """
@@ -49,8 +51,25 @@ class Executor:
         elif step.action == "review":
             console.print("  [yellow]Manual review required. Skipping execution.[/yellow]")
             return True
+        elif step.action == "tool_call":
+            return self._execute_tool(step.tool_call)
         else:
             console.print(f"  [red]Unknown action: {step.action}[/red]")
+            return False
+
+    def _execute_tool(self, call: ToolCall) -> bool:
+        if not call:
+            console.print("  [red]Tool call missing details.[/red]")
+            return False
+            
+        console.print(f"  [cyan]Calling Tool:[/cyan] {call.tool} Args: {call.args}")
+        result = self.registry.execute_tool(call)
+        
+        if result.success:
+            console.print(f"  [green]Result:[/green] {result.output}")
+            return True
+        else:
+            console.print(f"  [red]Tool Error:[/red] {result.error} - {result.output}")
             return False
 
     def _create_file(self, path: str, content: str | None) -> bool:
