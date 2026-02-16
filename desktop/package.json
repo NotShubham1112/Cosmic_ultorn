@@ -1,0 +1,28 @@
+{
+  "name": "desktop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "build:electron": "tsc",
+    "dev:electron": "tsc -w",
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:electron\" \"npm run dev:next\" \"wait-on http://localhost:3000 && npm run start\"",
+    "dev:next": "cd app && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/electron-devtools-installer": "^2.2.5",
+    "@types/node": "^25.2.3",
+    "concurrently": "^9.2.1",
+    "electron": "^40.4.1",
+    "electron-builder": "^26.7.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
+    "wait-on": "^9.0.4"
+  }
+}
